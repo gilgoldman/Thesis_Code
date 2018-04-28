@@ -1,0 +1,4 @@
+Once in SQLITE shell, the following commands can be useful:
+
+.quit - quit
+.table - shows exiting tables
