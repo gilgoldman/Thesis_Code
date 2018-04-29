@@ -10,7 +10,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    
+    text_test = Path("/home/pi/Thesis_Code/Test_Signal.txt")
+    if text_test.is_file(): # Test if file exists
+        try:
+            os.remove("Test_Signal.txt")
+        except OSError:
+            pass
     return render_template('index.html')
 
 @app.route('/on')

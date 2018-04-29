@@ -11,7 +11,7 @@ import time # ...guess
 
 # This function checks if the "On" signal is given from the
 # web page. If it is, it runs everything
-def listener():
+def Listener():
     x = False
     while (x == False): # This loop assures the code runs until the signal is given
         text_test = Path("/home/pi/Thesis_Code/Test_Signal.txt")
@@ -31,8 +31,16 @@ def listener():
 	    time.sleep(2)
 	    print "Waiting..." # Was here for debugging
 
-# This is where the action happens!
-def Cycle():
-    print "Success!"
+# This function measures distance using distTest, averages it, and returns the result
+def Distance_Measurement():
+    distance_data = []
+    for _ in xrange(10)
+	x = distTest.main()
+	distance_data.append(x)
+    distance_average = float(sum(distance_data))/float(len(distance_data))
+    return distance_average
 
-listener()
+
+def Cycle:
+
+Listener()
