@@ -11,12 +11,9 @@ import sys
 from time import sleep
 import RPi.GPIO as GPIO
 
-# Here you should update you own GPIO code
-GPIO.setmode (GPIO.BOARD)
-GPIO.setup(18,GPIO.IN)
+#GPIO.setmode (GPIO.BOARD)
+#GPIO.setup(18,GPIO.IN)
 GPIO.setwarnings(False)
-
-
 
 IP = "192.168.0.91" # The IP of the machine hosting your influxdb instance
 DB = "sensor_logs" # The database to write to, has to exist
@@ -30,4 +27,6 @@ TIME = 5 # Delay in seconds between two consecutive updates
 #        print ('Failed to add point to influxdb (%d) - aborting.' %r.status_code) 
 #        sys.exit(1) 
 #    sleep(TIME)
+while True:
+    
 
