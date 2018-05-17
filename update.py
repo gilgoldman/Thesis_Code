@@ -16,17 +16,24 @@ import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
 IP = "192.168.0.91" # The IP of the machine hosting your influxdb instance
-DB = "sensor_logs" # The database to write to, has to exist
+DB = "Test" # The database to write to, has to exist
 USER = "logs_user" # The influxdb user to authenticate with
 PASSWORD = "1234" # The password of that user 
 TIME = 5 # Delay in seconds between two consecutive updates 
+
 #while True: 
 #    v = 'Button value=%s' % GPIO.input(18) 
-#    r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v) 
+#    r =  requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v) 
 #        if r.status_code != 204: 
 #        print ('Failed to add point to influxdb (%d) - aborting.' %r.status_code) 
 #        sys.exit(1) 
 #    sleep(TIME)
-while True:
-    
 
+while True:
+    v = "Distance value=%s" % distTest.main()
+    print v
+    r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
+    if r.status_code != 204:
+        print ('Failed to add point to influxdb (%d) - aborting.' %r.status_code)
+	sys.exit(1)
+    sleep(TIME)
