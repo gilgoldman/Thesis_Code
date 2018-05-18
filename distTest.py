@@ -4,7 +4,7 @@ import numpy
 
 def main():
     result_list = [] # a list to be used in calculation of average
-    count = 26  # Number of iterations
+    count = 100  # Number of iterations
 #    writer = open("Measurement_14_mm.txt", "w") # opens a text file
     for _ in range(count):
 	TRIG = 23 # BCM value of pin 16
@@ -40,11 +40,11 @@ def main():
 #	writer.write(diststr) # write distance string to the open text file
 #	writer.write("\n") # write a new line 
 
-	print "Distance:", distance, "cm"
+#	print "Distance:", distance, "cm"
         GPIO.cleanup()
 
     avg = (float(sum(result_list)))/(float(len(result_list))) # Calculates the measurement average
-    avg = round(avg, 4) 
+    avg = round(avg, 4)
  #   std = numpy.std(result_list, ddof=1)
  #   avg_str = "The average distance is: ", avg, 
  #   std_str = "The Standard deviation is: ", std
@@ -53,10 +53,10 @@ def main():
  #   writer.write(str_conv1)
  #   writer.write(str_conv2)
  #   writer.close()
-    print "Average distance: ", avg, "cm"
+#    print "Average distance: ", avg, "cm"
 #    print "Standard Deviation: ", std
 #    avg = round(avg, 4)
-#    return avg
+    return avg
 
 if __name__ == "__main__":
     x = main()

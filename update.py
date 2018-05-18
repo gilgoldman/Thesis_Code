@@ -30,7 +30,9 @@ TIME = 5 # Delay in seconds between two consecutive updates
 #    sleep(TIME)
 
 while True:
-    v = "Distance value=%s" % distTest.main()
+#    v = "Distance value=%s" % distTest.main()
+    dist_value = disTest.main()
+    temp_value = test
     print v
     r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
     if r.status_code != 204:
