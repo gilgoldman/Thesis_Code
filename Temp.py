@@ -19,8 +19,8 @@ def main():
     hum_avg = float(sum(hum_list))/float(len(hum_list))
 
 #    return temp_avg
-
-    print temp_avg
+    temp_in_f = 1.8*temp_avg + 32
+    print temp_in_f
 
 #print "Average temperature is: ", temp_avg, "C"
 #print "Average humidity is : ", hum_avg, "%"

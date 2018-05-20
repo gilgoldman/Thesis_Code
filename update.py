@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import dht11 # This imports dht11 for temperature measurement
+#import dht11 # This imports dht11 for temperature measurement
 import distTest # This imports distest for the distance measurement
 from datetime import datetime # For time stamps to the database
 import argparse
@@ -15,7 +15,8 @@ import RPi.GPIO as GPIO
 #GPIO.setup(18,GPIO.IN)
 GPIO.setwarnings(False)
 
-IP = "192.168.0.91" # The IP of the machine hosting your influxdb instance
+#IP = "192.168.0.91" # The IP of the machine hosting your influxdb instance
+IP = "169.254.121.197"
 DB = "Test" # The database to write to, has to exist
 USER = "logs_user" # The influxdb user to authenticate with
 PASSWORD = "1234" # The password of that user 
@@ -30,10 +31,10 @@ TIME = 5 # Delay in seconds between two consecutive updates
 #    sleep(TIME)
 
 while True:
-#    v = "Distance value=%s" % distTest.main()
-    dist_value = disTest.main()
-    temp_value = test
-    print v
+    v = "Distance value=%s" % distTest.main()
+#    dist_value = disTest.main()
+#    temp_value = test
+#    print v
     r = requests.post("http://%s:8086/write?db=%s" %(IP, DB), auth=(USER, PASSWORD), data=v)
     if r.status_code != 204:
         print ('Failed to add point to influxdb (%d) - aborting.' %r.status_code)

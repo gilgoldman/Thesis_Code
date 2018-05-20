@@ -45,7 +45,8 @@ def main():
 
     avg = (float(sum(result_list)))/(float(len(result_list))) # Calculates the measurement average
     avg = round(avg, 4)
- #   std = numpy.std(result_list, ddof=1)
+    std = numpy.std(result_list, ddof=1)
+    std = round(std, 6)
  #   avg_str = "The average distance is: ", avg, 
  #   std_str = "The Standard deviation is: ", std
  #   str_conv1 = str(avg_str)
@@ -53,10 +54,10 @@ def main():
  #   writer.write(str_conv1)
  #   writer.write(str_conv2)
  #   writer.close()
-#    print "Average distance: ", avg, "cm"
-#    print "Standard Deviation: ", std
+    print "Average distance: ", avg, "cm"
+    print "Standard Deviation: ", std
 #    avg = round(avg, 4)
-    return avg
+#    return avg
 
 if __name__ == "__main__":
     x = main()
