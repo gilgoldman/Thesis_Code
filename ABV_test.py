@@ -68,30 +68,30 @@ def dist():
 def main():
     # Constants:
     cal_temp = 68 # Hydrometer calibration temperature
-#    f = 69.8 # fluid temperature constant for testing
-#    distance = 9.5 # Distance for tests
+#    f = 87  # fluid temperature constant for testing
+#    distance = 9.55 # Distance for tests
     f = Temp.main()
     distance = dist()
 
     # All the Maths!
-    sg = 1.11938 - (0.0125*distance) # SG based on linear scale
+    sg = 1.12363 - (0.0125*distance) # SG based on linear scale
     num = 1.00130346 - 1.34722124*(10**(-4))*f + 2.04052596*(10**(-6))*(f**2) - 2.32820948*(10**(-9))*(f**3)
     den = 1.00130346 - 1.34722124*(10**(-4))*cal_temp + 2.04052596*(10**(-6))*(cal_temp**2) - 2.32820948*(10**(-9))*(cal_temp**3)
     C_g = sg*(num/den) # corrected SG
 #    C_g = sg * (1 - 0.00025*(f - cal_temp))
-    ABW = 517.4*(1-C_g) + 5084*((1-C_g)**2) + 33503*((1-C_g)**3) # Alcohol by weight
-    ABV = (ABW*C_g)/0.791 # Alcohol by volume
+#    ABW = 517.4*(1-C_g) + 5084*((1-C_g)**2) + 33503*((1-C_g)**3) # Alcohol by weight
+#    ABV = (ABW*C_g)/0.791 # Alcohol by volume
 
+#    ABW = ABW * -0.2
+#    ABV = ABV * -0.2
 
-
-
-    print "Temp in c is: ", f
+    print "Temp in f is: ", f
     print "Distance is: ", distance
     print "Specific gravity is: ", sg
     print "Numerator : ", num, " And denominator: ", den
     print "Corrected gravity is: ", C_g
-    print "Alcohol by weight: ", ABW
-    print "Alcohol by volume: ", ABV
+#    print "Alcohol by weight: ", ABW
+#    print "Alcohol by volume: ", ABV
 
 if __name__ == "__main__":
     x = main()
