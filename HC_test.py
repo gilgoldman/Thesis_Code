@@ -1,12 +1,10 @@
 import RPi.GPIO as GPIO
 import time
 import numpy
-import Temp
 
-
-def dist():
+def main():
     result_list = [] # a list to be used in calculation of average
-    count = 100  # Number of iterations
+    count = 10  # Number of iterations
 #    writer = open("Measurement_14_mm.txt", "w") # opens a text file
     for _ in range(count):
 	TRIG = 23 # BCM value of pin 16
@@ -41,11 +39,13 @@ def dist():
 #	diststr = str(distance) # convert distance to string
 #	writer.write(diststr) # write distance string to the open text file
 #	writer.write("\n") # write a new line 
-#	print "Distance:", distance, "cm"
+
+	print "Distance:", distance, "cm"
         GPIO.cleanup()
 
     avg = (float(sum(result_list)))/(float(len(result_list))) # Calculates the measurement average
-    avg = round(avg, 4)
+#    avg = avg/3 # A shortened avg to simulate alcohol percentage
+    avg = round(avg, 2)
     std = numpy.std(result_list, ddof=1)
     std = round(std, 6)
  #   avg_str = "The average distance is: ", avg, 
@@ -55,44 +55,11 @@ def dist():
  #   writer.write(str_conv1)
  #   writer.write(str_conv2)
  #   writer.close()
-#    print "Average distance: ", avg, "cm"
-#    print "Standard Deviation: ", std
-#    avg = round(avg, 4)
-    return avg
+    print "Average distance: ", avg, "cm"
+    print "Standard Deviation: ", std
 
-
-
-
-
-def main():
-    # Constants:
-    cal_temp = 68 # Hydrometer calibration temperature
-#    f = 87  # fluid temperature constant for testing
-#    distance = 9.55 # Distance for tests
-    f = Temp.main()
-    distance = dist()
-
-    # All the Maths!
-    sg = 1.12363 - (0.0125*distance) # SG based on linear scale
-    num = 1.00130346 - 1.34722124*(10**(-4))*f + 2.04052596*(10**(-6))*(f**2) - 2.32820948*(10**(-9))*(f**3)
-    den = 1.00130346 - 1.34722124*(10**(-4))*cal_temp + 2.04052596*(10**(-6))*(cal_temp**2) - 2.32820948*(10**(-9))*(cal_temp**3)
-    C_g = sg*(num/den) # corrected SG
-#    C_g = sg * (1 - 0.00025*(f - cal_temp))
-#    ABW = 517.4*(1-C_g) + 5084*((1-C_g)**2) + 33503*((1-C_g)**3) # Alcohol by weight
-#    ABV = (ABW*C_g)/0.791 # Alcohol by volume
-
-#    ABW = ABW * -0.2
-#    ABV = ABV * -0.2
-
-#    print "Temp in f is: ", f
-#    print "Distance is: ", distance
-#    print "Specific gravity is: ", sg
-#    print "Numerator : ", num, " And denominator: ", den
-#    print "Corrected gravity is: ", C_g
-#    print "Alcohol by weight: ", ABW
-#    print "Alcohol by volume: ", ABV
-    C_g = round(C_g, 5)
-    return C_g
+    print "Beep"
+#    return avg
 
 if __name__ == "__main__":
     x = main()

@@ -1,45 +1,39 @@
-import RPi.GPIO as GPIO
-from flask import Flask, render_template
-import dht11
-import time
+from datetime import datetime
+from flask import Flask, render_template # Web Framework
+import numpy as np # For fancy math
+import os
+from pathlib import Path
+import sqlite3 # Database
+import time # guess
 
 app = Flask(__name__)
-ledPin = 5
-GPIO.cleanup()
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(ledPin, GPIO.OUT)
-GPIO.setwarnings(False)
-
 
 @app.route('/')
 def index():
-	GPIO.output(ledPin, GPIO.HIGH)
-	return render_template('index.html')
-
+    text_test = Path("/home/pi/Thesis_Code/Test_Signal.txt")
+    if text_test.is_file(): # Test if file exists
+        try:
+            os.remove("Test_Signal.txt")
+        except OSError:
+            pass
+    return render_template('index.html')
 
 @app.route('/on')
-def on(): # Blinks LED 5 times
-	"""x = 0
-	while x<5:"""
-	for _ in xrange(5):
-		GPIO.output(ledPin, GPIO.HIGH)
-		time.sleep(1)
-		GPIO.output(ledPin, GPIO.LOW)
-		time.sleep(1)
-		
-        return "All good"
-@app.route('/temp')
-def temp():
-        instance = dht11.DHT11(pin = 7)
-        result = instance.read()
-        if result.is_valid():
-            A = "Temperature: %d C" % result.temperature
-            B = "Humidity: %d %%" % result.humidity
-            #return ("Temperature: %d C" % result.temperature + "Humidity: %d %%" % result.humidity)
-            #print """ Temperature: %d C
-            #Humidity: %d""" % (result.temperature, result.humidity)
-            return """Temperature: %d C <br/>Humidity: %d""" % (result.temperature, result.humidity)
+def led_on():
+    text_test = Path("/home/pi/Thesis_Code/Text_Signal.txt")
+    if text_test.is_file():
+        try:
+            os.remove("Test_Signal.txt")
+        except OSError:
+	    pass
+    else:
+	text_instance = open("Test_Signal.txt", "w")
+	text_instance.write("On")
+	text_instance.close()
+
+    return "Are you feeling it now Mr. Krabs?"
 
 
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0')
+        app.run(debug=True, host='0.0.0.0')
+

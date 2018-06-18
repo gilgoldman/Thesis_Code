@@ -21,10 +21,10 @@ def main():
 #    return temp_avg
     temp_in_f = 1.8*temp_avg + 32
 #    print temp_in_f
-    return temp_in_f
-#print "Average temperature is: ", temp_avg, "C"
-#print "Average temperature in Fahrenheit is:", temp_in_f, "F"
-#print "Average humidity is : ", hum_avg, "%"
+#    return temp_in_f
+    print "Average temperature is: ", temp_avg, "C"
+    print "Average temperature in Fahrenheit is:", temp_in_f, "F"
+    print "Average humidity is : ", hum_avg, "%"
 
 if __name__ == "__main__":
     x = main()
